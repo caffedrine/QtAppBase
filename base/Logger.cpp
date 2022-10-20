@@ -14,9 +14,6 @@
 #include <spdlog/async_logger.h>
 #include <QFileInfo>
 
-spdlog::logger *logger;
-QPlainTextEdit *loggerContentGui;
-
 namespace spdlog
 {
     namespace sinks
@@ -50,72 +47,77 @@ namespace spdlog
     } // namespace sinks
 } // namespace spdlog
 
-void QtCustomOutputMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+namespace base
 {
-#ifdef QT_DEBUG
-    QFileInfo f(QFile(context.file));
-    QString ctx_str = "[" + QString(f.fileName()) + ":" + QString::number(context.line) + "] ";
-#else
-    QString ctx_str = "";
-#endif
-    switch (type)
-    {
-        case QtDebugMsg:
-            logger->debug( QString(ctx_str + msg).toStdString());
-            break;
-        case QtWarningMsg:
-            logger->warn( QString(ctx_str + msg).toStdString());
-            break;
-        case QtCriticalMsg:
-            logger->critical( QString(ctx_str + msg).toStdString());
-            break;
-        case QtFatalMsg:
-            logger->error( QString(ctx_str + msg).toStdString());
-            break;
-        default:
-            logger->info( QString(ctx_str + msg).toStdString());
-    }
-}
+	spdlog::logger *logger;
+	QPlainTextEdit *loggerContentGui;
 
-void setup_logger(bool consoleMode)
-{
-    if( !consoleMode )
-    {
-        // Init GUI logs display
-        loggerContentGui = new QPlainTextEdit();
-    }
+	void QtCustomOutputMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+	{
+	#ifdef QT_DEBUG
+	    QFileInfo f(QFile(context.file));
+	    QString ctx_str = "[" + QString(f.fileName()) + ":" + QString::number(context.line) + "] ";
+	#else
+	    QString ctx_str = "";
+	#endif
+	    switch (type)
+	    {
+	        case QtDebugMsg:
+	            logger->debug( QString(ctx_str + msg).toStdString());
+	            break;
+	        case QtWarningMsg:
+	            logger->warn( QString(ctx_str + msg).toStdString());
+	            break;
+	        case QtCriticalMsg:
+	            logger->critical( QString(ctx_str + msg).toStdString());
+	            break;
+	        case QtFatalMsg:
+	            logger->error( QString(ctx_str + msg).toStdString());
+	            break;
+	        default:
+	            logger->info( QString(ctx_str + msg).toStdString());
+	    }
+	}
 
-    try
-    {
-        // Init logger components
-        auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-        stdout_sink->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
+	void setup_logger(bool consoleMode)
+	{
+	    if( !consoleMode )
+	    {
+	        // Init GUI logs display
+	        loggerContentGui = new QPlainTextEdit();
+	    }
 
-        auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(QCoreApplication::applicationDirPath().toStdString() + "/logs.log", 1024 * 1024 * 20, 10);
-        rotating_sink->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [pid %P] [thread %t] [%^%l%$] %v");
+	    try
+	    {
+	        // Init logger components
+	        auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+	        stdout_sink->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
 
-        // Init logger instance
-        spdlog::sinks_init_list sinks = {stdout_sink, rotating_sink};
-        logger = new spdlog::logger("main", sinks);
-//        if( !consoleMode )
-//        {
-//            auto gui_qplaintextedit = std::make_shared<spdlog::sinks::qplaintextedit_sink_mt>(loggerContentGui);
-//            gui_qplaintextedit->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
-//            logger->sinks().push_back(gui_qplaintextedit);
-//        }
+	        auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(QCoreApplication::applicationDirPath().toStdString() + "/logs.log", 1024 * 1024 * 20, 10);
+	        rotating_sink->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [pid %P] [thread %t] [%^%l%$] %v");
 
-        logger->set_level(spdlog::level::trace);
+	        // Init logger instance
+	        spdlog::sinks_init_list sinks = {stdout_sink, rotating_sink};
+	        logger = new spdlog::logger("main", sinks);
+	//        if( !consoleMode )
+	//        {
+	//            auto gui_qplaintextedit = std::make_shared<spdlog::sinks::qplaintextedit_sink_mt>(loggerContentGui);
+	//            gui_qplaintextedit->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
+	//            logger->sinks().push_back(gui_qplaintextedit);
+	//        }
 
-        // Init global logger
-        //spdlog::register_logger(std::shared_ptr<spdlog::logger>(logger));
-        spdlog::set_default_logger(std::shared_ptr<spdlog::logger>(logger));
-    }
-    catch( const spdlog::spdlog_ex &ex )
-    {
-        std::cout << "Logger initialization failed: " << ex.what() << std::endl;
-    }
+	        logger->set_level(spdlog::level::trace);
 
-    // Bind Qt logging functions to spdlog
-    qInstallMessageHandler(QtCustomOutputMessage);
-}
+	        // Init global logger
+	        //spdlog::register_logger(std::shared_ptr<spdlog::logger>(logger));
+	        spdlog::set_default_logger(std::shared_ptr<spdlog::logger>(logger));
+	    }
+	    catch( const spdlog::spdlog_ex &ex )
+	    {
+	        std::cout << "Logger initialization failed: " << ex.what() << std::endl;
+	    }
 
+	    // Bind Qt logging functions to spdlog
+	    qInstallMessageHandler(QtCustomOutputMessage);
+	}
+} // namespace base
