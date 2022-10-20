@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MULTISELECTCOMBOBOX_H_
+#define _MULTISELECTCOMBOBOX_H_
 
 #include <QComboBox>
 #include <QListWidget>
@@ -40,3 +41,5 @@ private:
     QLineEdit* mLineEdit;
     QLineEdit* mSearchBar;
 };
+
+#endif // _MULTISELECTCOMBOBOX_H_
