@@ -1,18 +1,17 @@
 #include "Logger.h"
 #include <QCoreApplication>
 #include <QFile>
-
-
+#include <QFileInfo>
 #include <iostream>
 #include <mutex>
-
 #include <spdlog/sinks/base_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/fmt/bin_to_hex.h>
 #include <spdlog/async_logger.h>
-#include <QFileInfo>
+#include "spdlog/cfg/env.h"  // support for loading levels from the environment variable
+#include "spdlog/fmt/ostr.h" // support for user defined types
 
 namespace spdlog
 {
