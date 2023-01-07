@@ -23,11 +23,6 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-# make sure __cplusplus is defined when using msvc
-if(MSVC)
-    string(APPEND CMAKE_CXX_FLAGS " /Zc:__cplusplus /MP")
-endif()
-
 # Find required Qt5 or Qt6 dependencies
 find_package(QT NAMES Qt6 Qt5)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent REQUIRED)

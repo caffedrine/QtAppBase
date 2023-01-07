@@ -1,5 +1,5 @@
 #ifndef _BASE_LOGGER_H_
-#define _BASE__LOGGER_H_
+#define _BASE_LOGGER_H_
 
 #include <QPlainTextEdit>
 

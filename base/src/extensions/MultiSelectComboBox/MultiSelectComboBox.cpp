@@ -65,7 +65,7 @@ void MultiSelectComboBox::stateChanged(int aState)
     }
     if (selectedData.endsWith(";"))
     {
-        selectedData.remove(selectedData.count() - 1, 1);
+        selectedData.remove(selectedData.size() - 1, 1);
     }
     if (!selectedData.isEmpty())
     {
