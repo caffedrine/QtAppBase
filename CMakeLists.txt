@@ -29,11 +29,10 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent RE
 
 # Find the precompiled libQtAppBase library
 #add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/base)
-find_library(QTAPPBASE_LIB NAMES QtAppBase libQtAppBase HINTS "${CMAKE_CURRENT_LIST_DIR}/base/lib" REQUIRED)
-include_directories( ${CMAKE_CURRENT_LIST_DIR}/base/lib )
-include_directories( ${CMAKE_CURRENT_LIST_DIR}/base/lib/thirdparty )
-add_custom_target("deploy")
-add_custom_command(TARGET "deploy" POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_LIST_DIR}/base/lib/libQtAppBase.dll" "${CMAKE_BINARY_DIR}/../Deploy/Windows/${PROJECT_NAME}.exe" COMMENT "Copying libQtAppBase to output directory")
+set(QTAPPBASE_LIB_DIR "${CMAKE_CURRENT_LIST_DIR}/base/build/deploy")
+find_library(QTAPPBASE_LIB NAMES QtAppBase libQtAppBase HINTS "${QTAPPBASE_LIB_DIR}/lib" REQUIRED)
+include_directories( ${QTAPPBASE_LIB_DIR}/includes/thirdparty )
+include_directories( ${QTAPPBASE_LIB_DIR}/includes )
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
@@ -43,3 +42,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Concurrent
         ${QTAPPBASE_LIB})
+
+# Deploy base library to executable folder
+file(GLOB QTAPPBASE_LIBS "${QTAPPBASE_LIB_DIR}/lib/*")
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${QTAPPBASE_LIBS} "${CMAKE_BINARY_DIR}/" COMMENT "Copying libQtAppBase to output directory")
