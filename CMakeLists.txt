@@ -27,14 +27,13 @@ endif()
 find_package(QT NAMES Qt6 Qt5)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent REQUIRED)
 
-# Find the precompiled libQtAppBase.a library
+# Find the precompiled libQtAppBase library
 #add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/base)
-find_library(QTAPPBASE_LIB
-        NAMES QtAppBase libQtAppBase
-        HINTS "${CMAKE_CURRENT_LIST_DIR}/base/lib"
-        REQUIRED)
-include_directories( base/lib )
-include_directories( base/lib/thirdparty )
+find_library(QTAPPBASE_LIB NAMES QtAppBase libQtAppBase HINTS "${CMAKE_CURRENT_LIST_DIR}/base/lib" REQUIRED)
+include_directories( ${CMAKE_CURRENT_LIST_DIR}/base/lib )
+include_directories( ${CMAKE_CURRENT_LIST_DIR}/base/lib/thirdparty )
+add_custom_target("deploy")
+add_custom_command(TARGET "deploy" POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_LIST_DIR}/base/lib/libQtAppBase.dll" "${CMAKE_BINARY_DIR}/../Deploy/Windows/${PROJECT_NAME}.exe" COMMENT "Copying libQtAppBase to output directory")
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
