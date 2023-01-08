@@ -1,4 +1,5 @@
 .idea
-dist/gendata
+!build/
+
 build/*
-!build/deploy/*
+!build/deploy/
