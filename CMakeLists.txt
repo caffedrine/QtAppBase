@@ -28,9 +28,9 @@ find_package(QT NAMES Qt6 Qt5)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent REQUIRED)
 
 # Find the precompiled libQtAppBase library
-#add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/base)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/base)
 set(QTAPPBASE_LIB_DIR "${CMAKE_CURRENT_LIST_DIR}/base/build/deploy")
-find_library(QTAPPBASE_LIB NAMES QtAppBase libQtAppBase HINTS "${QTAPPBASE_LIB_DIR}/lib" REQUIRED)
+#find_library(QTAPPBASE_LIB NAMES QtAppBase libQtAppBase HINTS "${QTAPPBASE_LIB_DIR}/lib" REQUIRED)
 include_directories( ${QTAPPBASE_LIB_DIR}/includes/thirdparty )
 include_directories( ${QTAPPBASE_LIB_DIR}/includes )
 
