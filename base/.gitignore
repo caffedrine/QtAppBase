@@ -1,0 +1,4 @@
+.idea
+dist/gendata
+build/*
+!build/deploy/*
