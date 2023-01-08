@@ -33,7 +33,6 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent Xm
 
 # include headers
 include_directories(${CMAKE_CURRENT_LIST_DIR}/src)
-include_directories(thirdparty)
 
 # Get all sources
 file(GLOB_RECURSE Proj_SOURCES "src/*.c" "src/*.cpp")
@@ -43,9 +42,11 @@ file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 add_library(${LIB_NAME} SHARED  ${Proj_SOURCES} ${Thirdparty_SOURCES})
 set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION})
 
-# include spdlog
+# include thirdparty libs
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog/include)
+include_directories(thirdparty)
+include_directories(thirdparty/uriparser/include)
 
 target_link_libraries(${LIB_NAME} PUBLIC
         Qt${QT_VERSION_MAJOR}::Core
@@ -60,7 +61,7 @@ set(DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
 install(TARGETS ${LIB_NAME} DESTINATION ${DEPLOY_DIR}/lib)
 
 # Install headers for sources
-install(DIRECTORY "src/" DESTINATION "${DEPLOY_DIR}/includes/${LIB_NAME}/" FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY "src/" DESTINATION "${DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
 
 # Install headers for thirdparty applications
 install(DIRECTORY thirdparty/spdlog/include/spdlog DESTINATION ${DEPLOY_DIR}/includes/thirdparty)
