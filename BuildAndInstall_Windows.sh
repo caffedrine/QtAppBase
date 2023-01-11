@@ -10,6 +10,7 @@
 #!/usr/bin/env bash
 
 rm -R build/Release
+mkdir build
 mkdir build/Release
 cd build/Release
 
@@ -17,7 +18,8 @@ cmake ../../ -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" "$@"
 
 mingw32-make all -j `nproc --ignore 1`
 
-cmake ../../ --target install
+cmake --install .
 
 # Wait to press anything
+echo "finish, press any key to continue"
 read -rn1
