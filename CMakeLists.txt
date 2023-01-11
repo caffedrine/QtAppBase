@@ -35,13 +35,15 @@ endif()
 find_package(QT NAMES Qt6 Qt5)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent Xml REQUIRED)
 
+file(GLOB_RECURSE LibPublicHeaders "src/*.h")
+
 # Get all sources
 file(GLOB_RECURSE Proj_SOURCES "src/*.c" "src/*.cpp")
 file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 
 # Create library
 add_library(${LIB_NAME} SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
-set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION})
+set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION} PUBLIC_HEADERS "${LibPublicHeaders}")
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
 
 # include thirdparty libs
@@ -50,7 +52,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog/include)
 include_directories(thirdparty)
 include_directories(thirdparty/uriparser/include)
 
-target_link_libraries(${LIB_NAME} PUBLIC
+target_link_libraries(${LIB_NAME} PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
