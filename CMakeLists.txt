@@ -42,7 +42,6 @@ file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 # Create library
 add_library(${LIB_NAME} SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
 set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION} PUBLIC_HEADER DIRECTORY "src/" FILES_MATCHING PATTERN "*.h")
-# include headers
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
 
 # include thirdparty libs
