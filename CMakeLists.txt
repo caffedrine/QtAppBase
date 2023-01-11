@@ -41,7 +41,7 @@ file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 
 # Create library
 add_library(${LIB_NAME} SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
-set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION} PUBLIC_HEADER DIRECTORY "src/" FILES_MATCHING PATTERN "*.h")
+set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION})
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
 
 # include thirdparty libs
@@ -50,7 +50,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog/include)
 include_directories(thirdparty)
 include_directories(thirdparty/uriparser/include)
 
-target_link_libraries(${LIB_NAME} PRIVATE
+target_link_libraries(${LIB_NAME} PUBLIC
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
@@ -65,7 +65,7 @@ install(TARGETS ${LIB_NAME} DESTINATION ${DEPLOY_DIR}/lib)
 # Install headers for sources
 install(DIRECTORY "src/" DESTINATION "${DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
 
-# Install headers for thirdparty applications
+## Install headers for thirdparty applications
 install(DIRECTORY thirdparty/spdlog/include/spdlog DESTINATION ${DEPLOY_DIR}/includes/thirdparty)
 install(FILES thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${DEPLOY_DIR}/includes/thirdparty)
 install(FILES thirdparty/QJsonModel/QJsonModel.h DESTINATION ${DEPLOY_DIR}/includes/thirdparty)
