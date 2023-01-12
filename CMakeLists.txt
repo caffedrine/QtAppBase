@@ -61,18 +61,22 @@ target_link_libraries(${LIB_NAME} PRIVATE
         Qt${QT_VERSION_MAJOR}::Xml
         spdlog::spdlog)
 
-# Install properly headers when used with add_subdirectory
-install(TARGETS ${LIB_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+# Perform local installation in the build folder after each build
+set(LOCAL_DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
 
+file(COPY "src/" DESTINATION "${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
+file(COPY thirdparty/spdlog/include/spdlog DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+file(COPY thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+file(COPY thirdparty/QJsonModel/QJsonModel.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
 
-# Install the library into a given folder
-set(DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
-install(TARGETS ${LIB_NAME} DESTINATION ${DEPLOY_DIR}/lib)
-
-# Install headers for sources
-install(DIRECTORY "src/" DESTINATION "${DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
-
-## Install headers for thirdparty applications
-install(DIRECTORY thirdparty/spdlog/include/spdlog DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-install(FILES thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-install(FILES thirdparty/QJsonModel/QJsonModel.h DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+## Install the library into a given folder
+#set(DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
+#install(TARGETS ${LIB_NAME} DESTINATION ${DEPLOY_DIR}/lib)
+#
+## Install headers for sources
+#install(DIRECTORY "src/" DESTINATION "${DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
+#
+### Install headers for thirdparty applications
+#install(DIRECTORY thirdparty/spdlog/include/spdlog DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+#install(FILES thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+#install(FILES thirdparty/QJsonModel/QJsonModel.h DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
