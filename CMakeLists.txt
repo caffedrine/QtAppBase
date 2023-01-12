@@ -47,6 +47,10 @@ target_include_directories(${LIB_NAME} PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
         $<INSTALL_INTERFACE:src>)
 
+target_include_directories(${LIB_NAME} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/spdlog/include>
+        $<INSTALL_INTERFACE:thirdparty/spdlog/include>)
+
 # include thirdparty libs
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog/include)
@@ -62,12 +66,14 @@ target_link_libraries(${LIB_NAME} PRIVATE
         spdlog::spdlog)
 
 # Perform local installation in the build folder after each build
-set(LOCAL_DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
-
-file(COPY "src/" DESTINATION "${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
-file(COPY thirdparty/spdlog/include/spdlog DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-file(COPY thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-file(COPY thirdparty/QJsonModel/QJsonModel.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+#set(LOCAL_DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
+#add_custom_command(TARGET ${LIB_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_NAME:${LIB_NAME}> ${LOCAL_DEPLOY_DIR}/lib/$<TARGET_FILE_NAME:${LIB_NAME}>)
+#add_custom_command(TARGET ${LIB_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_NAME:${LIB_NAME}>.a ${LOCAL_DEPLOY_DIR}/lib/$<TARGET_FILE_NAME:${LIB_NAME}>.a)
+## copy headers
+#file(COPY "src/" DESTINATION "${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
+#file(COPY thirdparty/spdlog/include/spdlog DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+#file(COPY thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+#file(COPY thirdparty/QJsonModel/QJsonModel.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
 
 ## Install the library into a given folder
 #set(DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)

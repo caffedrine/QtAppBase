@@ -11,6 +11,7 @@ mkdir build
 mkdir build/Release
 cd build/Release
 
+
 cmake ../../ -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" "$@"
 
 mingw32-make all -j `nproc --ignore 1`
