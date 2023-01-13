@@ -39,8 +39,9 @@ file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 
 # Create library
 add_library(${LIB_NAME} SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
+add_library(base::${LIB_NAME} ALIAS ${LIB_NAME})
 set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION})
-target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
+configure_file(${LIB_NAME}.pc.in ${LIB_NAME}.pc @ONLY)
 
 # Public API headers
 target_include_directories(${LIB_NAME} PUBLIC
@@ -64,6 +65,13 @@ target_link_libraries(${LIB_NAME} PRIVATE
         Qt${QT_VERSION_MAJOR}::Concurrent
         Qt${QT_VERSION_MAJOR}::Xml
         spdlog::spdlog)
+
+install(TARGETS ${LIB_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME}Config LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+export(TARGETS ${LIB_NAME} FILE "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}Config.cmake")
+install(EXPORT ${LIB_NAME}Config DESTINATION "${CMAKE_INSTALL_LIBDIR}/${LIB_NAME}/cmake" NAMESPACE base::)
+install(DIRECTORY src DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES ${CMAKE_BINARY_DIR}/${LIB_NAME}.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
 # Perform local installation in the build folder after each build
 #set(LOCAL_DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
