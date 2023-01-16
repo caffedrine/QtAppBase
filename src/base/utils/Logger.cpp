@@ -99,12 +99,12 @@ namespace base
 	        // Init logger instance
 	        spdlog::sinks_init_list sinks = {stdout_sink, rotating_sink};
 	        logger = new spdlog::logger("main", sinks);
-	//        if( !consoleMode )
-	//        {
-	//            auto gui_qplaintextedit = std::make_shared<spdlog::sinks::qplaintextedit_sink_mt>(loggerContentGui);
-	//            gui_qplaintextedit->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
-	//            logger->sinks().push_back(gui_qplaintextedit);
-	//        }
+	        if( !consoleMode )
+	        {
+	            auto gui_qplaintextedit = std::make_shared<spdlog::sinks::qplaintextedit_sink_mt>(loggerContentGui);
+	            gui_qplaintextedit->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
+	            logger->sinks().push_back(gui_qplaintextedit);
+	        }
 
 	        logger->set_level(spdlog::level::trace);
 

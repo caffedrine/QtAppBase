@@ -2,7 +2,7 @@
 #define _PARSER_URI_H_
 
 #include <QString>
-#include <uriparser/Uri.h>
+#include <base/thirdparty/uriparser/Uri.h>
 
 namespace Services { namespace Parsers {
     class Uri

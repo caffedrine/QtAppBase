@@ -31,10 +31,16 @@ configure_file(QtAppBase.pc.in QtAppBase.pc @ONLY)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/src/base)
 
 # include thirdparty libs
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog/include)
-include_directories(thirdparty)
-include_directories(thirdparty/uriparser/include)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/ASN1)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/ASN1)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/UriParser)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/UriParser)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/spdlog)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/spdlog/include)
+include_directories(thirdparty/base)
+include_directories(thirdparty/base/thirdparty)
 
 target_link_libraries(QtAppBase PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
@@ -51,13 +57,8 @@ target_include_directories(QtAppBase PUBLIC
 
 # Spdlog
 target_include_directories(QtAppBase PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/spdlog/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/base/thirdparty/spdlog/include>
         $<INSTALL_INTERFACE:thirdparty/spdlog/include>)
-
-# Uri parser
-target_include_directories(QtAppBase PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/uriparser/include>
-        $<INSTALL_INTERFACE:thirdparty/uriparser>)
 
 # thirdparty libs directory
 target_include_directories(QtAppBase PUBLIC

@@ -1,7 +1,7 @@
 #include <QCryptographicHash>
 #include "Hash.h"
 
-namespace Crypto { namespace Hash
+namespace base { namespace Crypto { namespace Hash
 {
     QByteArray MD5(const QByteArray &input)
     {
@@ -216,4 +216,4 @@ namespace Crypto { namespace Hash
         return QByteArray();
 #endif
     }
-}} // Namespaces
+}}} // Namespaces
