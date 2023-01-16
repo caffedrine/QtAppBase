@@ -12,7 +12,7 @@
 #include <QApplication>
 #include <QSaveFile>
 
-#include "utils/utils.h"
+#include "base/utils/utils.h"
 
 class AdvancedTableWidget: public QTableWidget
 {

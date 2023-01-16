@@ -14,11 +14,11 @@
 #include <QTextDocument>
 #include <QMutex>
 
-#include "app/Cfg_PortsScanner.h"
-#include "utils/utils.h"
-#include "utils/ThreadsPool.h"
-#include "PortsScanProfilesManager.h"
-#include "nMapXmlParser.h"
+#include "base/app/Cfg_PortsScanner.h"
+#include "base/utils/utils.h"
+#include "base/utils/ThreadsPool.h"
+#include "base/services/PortsScanner/PortsScanProfilesManager.h"
+#include "base/services/PortsScanner/nMapXmlParser.h"
 
 namespace Services { namespace PortsScanner
 {

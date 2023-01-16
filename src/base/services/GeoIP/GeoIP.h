@@ -3,10 +3,10 @@
 
 #include <QMutex>
 
-#include "app/Cfg_GeoIP.h"
+#include "base/app/Cfg_GeoIP.h"
 
-#include "DbIP/DbIP.h"
-#include "Maxmind/Maxmind.h"
+#include "base/services/GeoIP/DbIP/DbIP.h"
+#include "base/services/GeoIP/Maxmind/Maxmind.h"
 
 namespace Services { namespace GeoIP
 {

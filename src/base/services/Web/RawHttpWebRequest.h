@@ -5,8 +5,8 @@
 #include <QByteArray>
 #include <QSslSocket>
 #include <QTimer>
-#include "services/Web/Parsers/RawHttpResponseParser.h"
-#include "services/Web/Parsers/RawHttpRequestParser.h"
+#include "base/services/Web/Parsers/RawHttpResponseParser.h"
+#include "base/services/Web/Parsers/RawHttpRequestParser.h"
 
 namespace Services { namespace Web
 {

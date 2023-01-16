@@ -12,7 +12,7 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
-#include "Compiler.h"
+#include "base/Compiler.h"
 #include "HttpStatusCodes.h"
 
 class HttpWebRequestsResponse

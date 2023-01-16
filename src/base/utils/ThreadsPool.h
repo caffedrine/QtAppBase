@@ -1,7 +1,7 @@
 #ifndef _SERVICES_THREADSPOOL_H_
 #define _SERVICES_THREADSPOOL_H_
 
-#include "extensions/QThreadPoolExtended.h"
+#include "base/extensions/QThreadPoolExtended.h"
 
 class ThreadsPool
 {

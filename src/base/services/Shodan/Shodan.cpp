@@ -3,7 +3,7 @@
 #include <QFileInfo>
 #include "Shodan.h"
 
-#include "services/Web/HttpWebRequest.h"
+#include "base/services/Web/HttpWebRequest.h"
 
 Shodan::Shodan(QString apiKey): ApiKey(apiKey)
 {

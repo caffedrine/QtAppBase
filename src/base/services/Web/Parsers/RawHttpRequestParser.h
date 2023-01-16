@@ -3,7 +3,7 @@
 
 #include <QByteArray>
 #include <QMap>
-#include "utils/utils.h"
+#include "base/utils/utils.h"
 #include "HttpParsersBase.h"
 
 namespace Services { namespace Parsers {

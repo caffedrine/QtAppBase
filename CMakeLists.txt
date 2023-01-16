@@ -28,6 +28,7 @@ add_library(QtAppBase SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
 add_library(base::QtAppBase ALIAS QtAppBase)
 set_target_properties(QtAppBase PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION 1)
 configure_file(QtAppBase.pc.in QtAppBase.pc @ONLY)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src/base)
 
 # include thirdparty libs
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog)
@@ -48,9 +49,20 @@ target_include_directories(QtAppBase PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
         $<INSTALL_INTERFACE:src>)
 
+# Spdlog
 target_include_directories(QtAppBase PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/spdlog/include>
         $<INSTALL_INTERFACE:thirdparty/spdlog/include>)
+
+# Uri parser
+target_include_directories(QtAppBase PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/uriparser/include>
+        $<INSTALL_INTERFACE:thirdparty/uriparser>)
+
+# thirdparty libs directory
+target_include_directories(QtAppBase PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty>
+        $<INSTALL_INTERFACE:base/thirdparty>)
 
 install(TARGETS QtAppBase LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(TARGETS QtAppBase EXPORT QtAppBaseConfig LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

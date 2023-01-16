@@ -1,7 +1,7 @@
 #ifndef _CFG_PORTSSCANNER_H_
 #define _CFG_PORTSSCANNER_H_
 
-#include "app/UserSettings.h"
+#include "base/app/UserSettings.h"
 
 namespace Services { namespace PortsScanner { namespace Settings
 {

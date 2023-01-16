@@ -6,7 +6,7 @@
 #include <QMap>
 #include <QStringList>
 
-#include "utils/utils.h"
+#include "base/utils/utils.h"
 
 namespace Services { namespace PortsScanner
 {

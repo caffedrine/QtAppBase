@@ -2,9 +2,8 @@
 #define _SERVICES_PORTSSCANPROFILESMANAGER_H_
 
 #include <QObject>
-#include "utils/Singleton.h"
-
-#include "PortsScanBuiltInProfiles.h"
+#include "base/utils/Singleton.h"
+#include "base/services/PortsScanner/PortsScanBuiltInProfiles.h"
 
 namespace Services { namespace PortsScanner
 {

@@ -10,9 +10,9 @@
 #include <QThreadPool>
 #include <utility>
 
-#include "utils/Singleton.h"
-#include "extensions/AdvancedTableWidget.h"
-#include "utils/ThreadsPool.h"
+#include "base/utils/Singleton.h"
+#include "base/extensions/AdvancedTableWidget.h"
+#include "base/utils/ThreadsPool.h"
 #include "HttpStatusCodes.h"
 
 

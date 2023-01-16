@@ -4,7 +4,7 @@
 #include <QtCore/QString>
 #include <QtCore/QDebug>
 
-#include "services/GeoIP/MmdbReader.h"
+#include "../MmdbReader.h"
 
 namespace Services { namespace GeoIP
 {

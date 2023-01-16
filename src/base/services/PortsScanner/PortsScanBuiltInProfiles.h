@@ -2,7 +2,7 @@
 #define _PORTSSCANBUILTINPROFILES_H_
 
 #include "PortsScanProfileType.h"
-#include "utils/Singleton.h"
+#include "base/utils/Singleton.h"
 
 namespace Services { namespace PortsScanner
 {

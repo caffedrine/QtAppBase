@@ -6,7 +6,7 @@
 #include <QList>
 #include <QMap>
 
-#include "utils/utils.h"
+#include "base/utils/utils.h"
 
 namespace Services { namespace Parsers {
 
