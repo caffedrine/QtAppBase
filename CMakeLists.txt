@@ -1,10 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.9)
 
-set(PROJECT_VERSION 1.0.0)
-set(LIB_API_VERSION 1)
-
-project(QtAppBase VERSION ${PROJECT_VERSION} DESCRIPTION "Qt base components to be used across multiple projects")
-set(LIB_NAME QtAppBase)
+project(QtAppBase VERSION 1.0.0 DESCRIPTION "Qt base components to be used across multiple projects")
 
 include(GNUInstallDirs)
 
@@ -19,16 +15,6 @@ set(CMAKE_AUTORCC ON)
 # Assume error console to print out data always
 set(QT_ASSUME_STDERR_HAS_CONSOLE 1)
 
-if (MSVC)
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-endif()
-
-# Default build release
-if(NOT CMAKE_BUILD_TYPE)
-    message(STATUS "Building ${LIB_NAME} by default in Release mode unless a different mode is specified")
-    set(CMAKE_BUILD_TYPE Release)
-endif()
-
 # Find required Qt5 or Qt6 dependencies
 find_package(QT NAMES Qt6 Qt5)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent Xml REQUIRED)
@@ -38,19 +24,10 @@ file(GLOB_RECURSE Proj_SOURCES "src/*.c" "src/*.cpp")
 file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 
 # Create library
-add_library(${LIB_NAME} SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
-add_library(base::${LIB_NAME} ALIAS ${LIB_NAME})
-set_target_properties(${LIB_NAME} PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${LIB_API_VERSION})
-configure_file(${LIB_NAME}.pc.in ${LIB_NAME}.pc @ONLY)
-
-# Public API headers
-target_include_directories(${LIB_NAME} PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-        $<INSTALL_INTERFACE:src>)
-
-target_include_directories(${LIB_NAME} PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/spdlog/include>
-        $<INSTALL_INTERFACE:thirdparty/spdlog/include>)
+add_library(QtAppBase SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
+add_library(base::QtAppBase ALIAS QtAppBase)
+set_target_properties(QtAppBase PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION 1)
+configure_file(QtAppBase.pc.in QtAppBase.pc @ONLY)
 
 # include thirdparty libs
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog)
@@ -58,7 +35,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/spdlog/include)
 include_directories(thirdparty)
 include_directories(thirdparty/uriparser/include)
 
-target_link_libraries(${LIB_NAME} PRIVATE
+target_link_libraries(QtAppBase PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
@@ -66,31 +43,40 @@ target_link_libraries(${LIB_NAME} PRIVATE
         Qt${QT_VERSION_MAJOR}::Xml
         spdlog::spdlog)
 
-install(TARGETS ${LIB_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME}Config LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-export(TARGETS ${LIB_NAME} FILE "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}Config.cmake")
-install(EXPORT ${LIB_NAME}Config DESTINATION "${CMAKE_INSTALL_LIBDIR}/${LIB_NAME}/cmake" NAMESPACE base::)
+# Public API headers
+target_include_directories(QtAppBase PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+        $<INSTALL_INTERFACE:src>)
+
+target_include_directories(QtAppBase PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/spdlog/include>
+        $<INSTALL_INTERFACE:thirdparty/spdlog/include>)
+
+install(TARGETS QtAppBase LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(TARGETS QtAppBase EXPORT QtAppBaseConfig LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+export(TARGETS QtAppBase FILE "${CMAKE_CURRENT_BINARY_DIR}/QtAppBaseConfig.cmake")
+install(EXPORT QtAppBaseConfig DESTINATION "${CMAKE_INSTALL_LIBDIR}/QtAppBase/cmake" NAMESPACE base::)
 install(DIRECTORY src DESTINATION ${CMAKE_INSTALL_PREFIX})
-install(FILES ${CMAKE_BINARY_DIR}/${LIB_NAME}.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
+install(FILES ${CMAKE_BINARY_DIR}/QtAppBase.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
 # Perform local installation in the build folder after each build
 #set(LOCAL_DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
-#add_custom_command(TARGET ${LIB_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_NAME:${LIB_NAME}> ${LOCAL_DEPLOY_DIR}/lib/$<TARGET_FILE_NAME:${LIB_NAME}>)
-#add_custom_command(TARGET ${LIB_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_NAME:${LIB_NAME}>.a ${LOCAL_DEPLOY_DIR}/lib/$<TARGET_FILE_NAME:${LIB_NAME}>.a)
+#add_custom_command(TARGET QtAppBase POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_NAME:QtAppBase> ${LOCAL_DEPLOY_DIR}/lib/$<TARGET_FILE_NAME:QtAppBase>)
+#add_custom_command(TARGET QtAppBase POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_NAME:QtAppBase>.a ${LOCAL_DEPLOY_DIR}/lib/$<TARGET_FILE_NAME:QtAppBase>.a)
 ## copy headers
-#file(COPY "src/" DESTINATION "${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
-#file(COPY thirdparty/spdlog/include/spdlog DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-#file(COPY thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-#file(COPY thirdparty/QJsonModel/QJsonModel.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+#file(COPY "src/" DESTINATION "${LOCAL_DEPLOY_DIR}/includes/QtAppBase" FILES_MATCHING PATTERN "*.h")
+#file(COPY thirdparty/spdlog/include/spdlog DESTINATION ${LOCAL_DEPLOY_DIR}/includes/QtAppBase/thirdparty)
+#file(COPY thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/QtAppBase/thirdparty)
+#file(COPY thirdparty/QJsonModel/QJsonModel.h DESTINATION ${LOCAL_DEPLOY_DIR}/includes/QtAppBase/thirdparty)
 
 ## Install the library into a given folder
 #set(DEPLOY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/deploy)
-#install(TARGETS ${LIB_NAME} DESTINATION ${DEPLOY_DIR}/lib)
+#install(TARGETS QtAppBase DESTINATION ${DEPLOY_DIR}/lib)
 #
 ## Install headers for sources
-#install(DIRECTORY "src/" DESTINATION "${DEPLOY_DIR}/includes/${LIB_NAME}" FILES_MATCHING PATTERN "*.h")
+#install(DIRECTORY "src/" DESTINATION "${DEPLOY_DIR}/includes/QtAppBase" FILES_MATCHING PATTERN "*.h")
 #
 ### Install headers for thirdparty applications
-#install(DIRECTORY thirdparty/spdlog/include/spdlog DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-#install(FILES thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
-#install(FILES thirdparty/QJsonModel/QJsonModel.h DESTINATION ${DEPLOY_DIR}/includes/${LIB_NAME}/thirdparty)
+#install(DIRECTORY thirdparty/spdlog/include/spdlog DESTINATION ${DEPLOY_DIR}/includes/QtAppBase/thirdparty)
+#install(FILES thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${DEPLOY_DIR}/includes/QtAppBase/thirdparty)
+#install(FILES thirdparty/QJsonModel/QJsonModel.h DESTINATION ${DEPLOY_DIR}/includes/QtAppBase/thirdparty)
