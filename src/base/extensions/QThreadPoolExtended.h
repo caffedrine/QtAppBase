@@ -3,7 +3,9 @@
 
 #include <QThreadPool>
 
-class QThreadPoolExtended: public QThreadPool
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC QThreadPoolExtended: public QThreadPool
 {
 public:
     QThreadPoolExtended(QObject *parent = nullptr);

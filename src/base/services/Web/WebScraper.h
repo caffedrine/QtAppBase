@@ -10,6 +10,7 @@
 #include <QThreadPool>
 #include <utility>
 
+#include "base/LibCfg.h"
 #include "base/utils/Singleton.h"
 #include "base/extensions/AdvancedTableWidget.h"
 #include "base/utils/ThreadsPool.h"
@@ -17,7 +18,7 @@
 
 
 /* */
-class HttpResponse
+class DLL_DECL_SPEC HttpResponse
 {
 public:
     bool AppErrorDetected = false;
@@ -36,7 +37,7 @@ public:
 Q_DECLARE_METATYPE(HttpResponse)
 
 /* */
-class WebScraper: public QObject, public ThreadsPool
+class DLL_DECL_SPEC WebScraper: public QObject, public ThreadsPool
 {
 Q_OBJECT
 public:

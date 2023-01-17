@@ -32,6 +32,8 @@
 #include <QJsonValue>
 #include <QIcon>
 
+#include "base/LibCfg.h"
+
 namespace QUtf8Functions
 {
     /// returns 0 on success; errors can only happen if \a u is a surrogate:
@@ -202,7 +204,7 @@ namespace QUtf8Functions
     }
 }
 
-struct QUtf8BaseTraits
+struct DLL_DECL_SPEC QUtf8BaseTraits
 {
     static const bool isTrusted = false;
     static const bool allowNonCharacters = true;
@@ -264,7 +266,7 @@ struct QUtf8BaseTraits
 class QJsonModel;
 class QJsonItem;
 
-class QJsonTreeItem
+class DLL_DECL_SPEC QJsonTreeItem
 {
 public:
     QJsonTreeItem(QJsonTreeItem *parent = nullptr);
@@ -295,7 +297,7 @@ private:
 
 //---------------------------------------------------
 
-class QJsonModel : public QAbstractItemModel
+class DLL_DECL_SPEC QJsonModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:

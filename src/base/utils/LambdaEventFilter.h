@@ -9,9 +9,10 @@
 #include <QEvent>
 #include <stdlib.h>
 #include <experimental/tuple>
+#include "base/LibCfg.h"
 
 template<typename ...LARG>
-class LambdaEventFilter : public QObject {
+class DLL_DECL_SPEC LambdaEventFilter : public QObject {
 protected:
     struct AbstractLambdaContainer {
         virtual bool CallLambdaFunction(QObject*, QObject*, QEvent*) = 0;

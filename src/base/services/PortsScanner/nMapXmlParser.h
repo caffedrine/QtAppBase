@@ -4,10 +4,12 @@
 #include <QDomDocument>
 #include <QList>
 
+#include "base/LibCfg.h"
+
 namespace Services { namespace PortsScanner
 {
 
-class nMapPortState
+class DLL_DECL_SPEC nMapPortState
 {
 public:
     quint16 PortNumber;

@@ -2,28 +2,17 @@
 #define _PARSER_URI_H_
 
 #include <QString>
+
+#include "base/LibCfg.h"
 #include <base/thirdparty/uriparser/Uri.h>
 
 namespace Services { namespace Parsers {
-    class Uri
+    class DLL_DECL_SPEC Uri
     {
     public:
-        Uri(std::string uri): uri_(uri)
-        {
-            UriParserStateA state_;
-            state_.uri = &uriParse_;
-            isValid_   = uriParseUriA(&state_, uri_.c_str()) == URI_SUCCESS;
-        }
-
-        Uri(QString uri): uri_(uri.toStdString())
-        {
-            UriParserStateA state_;
-            state_.uri = &uriParse_;
-            isValid_   = uriParseUriA(&state_, uri_.c_str()) == URI_SUCCESS;
-        }
-
-
-        ~Uri() { uriFreeUriMembersA(&uriParse_); }
+        Uri(std::string uri);
+        Uri(QString uri);
+        ~Uri();
 
         bool isValid() const { return isValid_; }
 

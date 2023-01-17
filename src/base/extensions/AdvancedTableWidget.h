@@ -12,9 +12,10 @@
 #include <QApplication>
 #include <QSaveFile>
 
+#include "base/LibCfg.h"
 #include "base/utils/utils.h"
 
-class AdvancedTableWidget: public QTableWidget
+class DLL_DECL_SPEC AdvancedTableWidget: public QTableWidget
 {
     Q_OBJECT
 public:

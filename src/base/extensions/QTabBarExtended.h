@@ -8,7 +8,9 @@
 #include <QKeyEvent>
 #include <utility>
 
-class CancelEditFilter : public QObject
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC CancelEditFilter : public QObject
 {
 Q_OBJECT
 
@@ -50,7 +52,7 @@ private:
 };
 
 
-class QTabBarExtended: public QTabBar
+class DLL_DECL_SPEC QTabBarExtended: public QTabBar
 {
 Q_OBJECT
 

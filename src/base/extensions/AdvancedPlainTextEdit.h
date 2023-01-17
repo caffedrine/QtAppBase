@@ -7,7 +7,9 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 
-class AdvancedPlainTextEdit: public QTextEdit
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC AdvancedPlainTextEdit: public QTextEdit
 {
     Q_OBJECT
 public:

@@ -9,12 +9,14 @@
 #include <QtCore/QFile>
 #include <QtCore/QJsonValue>
 
+#include "base/LibCfg.h"
+
 namespace Services { namespace GeoIP
 {
 
 struct DataFieldDescriptor;
 
-class MmdbReader
+class DLL_DECL_SPEC MmdbReader
 {
     Q_DECLARE_TR_FUNCTIONS(CountryLookup)
 

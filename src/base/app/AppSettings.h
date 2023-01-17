@@ -4,6 +4,8 @@
 #include <QSettings>
 #include <QString>
 
+#include "base/LibCfg.h"
+
 #define ApplSettings AppSettings->instance()
 
 class AppSettings

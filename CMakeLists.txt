@@ -29,6 +29,7 @@ add_library(base::QtAppBase ALIAS QtAppBase)
 set_target_properties(QtAppBase PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION 1)
 configure_file(QtAppBase.pc.in QtAppBase.pc @ONLY)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/src/base)
+set(IS_BUILT_AS_LIBRARY 1)
 
 # include thirdparty libs
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/ASN1)
@@ -93,3 +94,9 @@ install(FILES ${CMAKE_BINARY_DIR}/QtAppBase.pc DESTINATION ${CMAKE_INSTALL_DATAR
 #install(DIRECTORY thirdparty/spdlog/include/spdlog DESTINATION ${DEPLOY_DIR}/includes/QtAppBase/thirdparty)
 #install(FILES thirdparty/MultiSelectComboBox/MultiSelectComboBox.h DESTINATION ${DEPLOY_DIR}/includes/QtAppBase/thirdparty)
 #install(FILES thirdparty/QJsonModel/QJsonModel.h DESTINATION ${DEPLOY_DIR}/includes/QtAppBase/thirdparty)
+
+if(${IS_BUILT_AS_LIBRARY})
+    add_definitions(-DDLL_DECL_SPEC=Q_DECL_EXPORT)
+else()
+    add_definitions(-DDLL_DECL_SPEC=Q_DECL_IMPORT)
+endif()

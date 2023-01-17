@@ -6,11 +6,12 @@
 #include <QMap>
 
 #include "PortScanTargetType.h"
+#include "base/LibCfg.h"
 
 namespace Services { namespace PortsScanner
 {
 
-class PortsScanProfileType
+class DLL_DECL_SPEC PortsScanProfileType
 {
 public:
     PortsScanProfileType() = default;

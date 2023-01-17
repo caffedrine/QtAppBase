@@ -4,13 +4,15 @@
 #include <QString>
 #include <QByteArray>
 
-class X509Certificate
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC X509Certificate
 {
 
 };
 
 namespace Core { namespace Crypto { namespace x509 {
-    QString GetCertHumanReadableFormat(const QByteArray &certBytes);
+    DLL_DECL_SPEC QString GetCertHumanReadableFormat(const QByteArray &certBytes);
 
 }}} //  namespaces
 

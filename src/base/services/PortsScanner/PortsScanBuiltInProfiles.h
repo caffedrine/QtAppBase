@@ -2,12 +2,14 @@
 #define _PORTSSCANBUILTINPROFILES_H_
 
 #include "PortsScanProfileType.h"
+
+#include "base/LibCfg.h"
 #include "base/utils/Singleton.h"
 
 namespace Services { namespace PortsScanner
 {
 
-class PortsScanBuiltInProfiles: public Singleton<PortsScanBuiltInProfiles>
+class DLL_DECL_SPEC PortsScanBuiltInProfiles: public Singleton<PortsScanBuiltInProfiles>
 {
 public:
     QList<PortsScanProfileType> GetAllProfiles()

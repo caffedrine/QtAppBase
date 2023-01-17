@@ -3,24 +3,25 @@
 
 #include <QString>
 #include <QStringList>
+#include "base/LibCfg.h"
 
 namespace utils { namespace network
 {
     namespace ipv4
     {
-        bool IsValidIP(QString ip);
-        QStringList ExtractIpAddresses(QString input);
-        QStringList ExtractIpPortProxies(QString input);
-        quint32 Dotted2Long(QString ip);
-        QString Dec2Dotted(quint32 ip);
-        void SortIpAddressesAsc(QStringList &input_list);
+        DLL_DECL_SPEC bool IsValidIP(QString ip);
+        DLL_DECL_SPEC QStringList ExtractIpAddresses(QString input);
+        DLL_DECL_SPEC QStringList ExtractIpPortProxies(QString input);
+        DLL_DECL_SPEC quint32 Dotted2Long(QString ip);
+        DLL_DECL_SPEC QString Dec2Dotted(quint32 ip);
+        DLL_DECL_SPEC void SortIpAddressesAsc(QStringList &input_list);
     }
 
     namespace ipv6
     {
-        bool IsValidIP(QString ip);
-        QStringList ExtractIpAddresses(QString input);
-        QStringList ExtractIpPortProxies(QString input);
+        DLL_DECL_SPEC bool IsValidIP(QString ip);
+        DLL_DECL_SPEC QStringList ExtractIpAddresses(QString input);
+        DLL_DECL_SPEC QStringList ExtractIpPortProxies(QString input);
     }
 }} // Namespaces
 

@@ -5,13 +5,14 @@
 
 #include "base/app/Cfg_GeoIP.h"
 
+#include "base/LibCfg.h"
 #include "base/services/GeoIP/DbIP/DbIP.h"
 #include "base/services/GeoIP/Maxmind/Maxmind.h"
 
 namespace Services { namespace GeoIP
 {
 
-class GeoIP
+class DLL_DECL_SPEC GeoIP
 {
 public:
     Q_DISABLE_COPY(GeoIP)

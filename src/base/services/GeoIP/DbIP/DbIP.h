@@ -5,11 +5,12 @@
 #include <QtCore/QDebug>
 
 #include "../MmdbReader.h"
+#include "base/LibCfg.h"
 
 namespace Services { namespace GeoIP
 {
 
-class DbIP
+class DLL_DECL_SPEC DbIP
 {
 public:
     static const int MAX_DB_SIZE = 64 * 1024 * 1024;

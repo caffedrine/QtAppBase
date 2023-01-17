@@ -5,8 +5,9 @@
 #include <QAbstractItemModel>
 #include <QDomDocument>
 
+#include "base/LibCfg.h"
 
-class DomItem
+class DLL_DECL_SPEC DomItem
 {
 public:
     DomItem(const QDomNode &node, int row, DomItem *parent = nullptr);
@@ -23,7 +24,7 @@ private:
     int rowNumber;
 };
 
-class DomModel : public QAbstractItemModel
+class DLL_DECL_SPEC DomModel : public QAbstractItemModel
 {
     Q_OBJECT
 

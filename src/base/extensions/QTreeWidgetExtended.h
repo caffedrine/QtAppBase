@@ -3,7 +3,9 @@
 
 #include <QTreeWidget>
 
-class QTreeWidgetExtended: public QTreeWidget
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC QTreeWidgetExtended: public QTreeWidget
 {
 Q_OBJECT
 

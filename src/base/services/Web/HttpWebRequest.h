@@ -12,10 +12,12 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
+
+#include "base/LibCfg.h"
 #include "base/Compiler.h"
 #include "HttpStatusCodes.h"
 
-class HttpWebRequestsResponse
+class DLL_DECL_SPEC HttpWebRequestsResponse
 {
 public:
     bool HttpErrorDetected = false;
@@ -86,7 +88,7 @@ public:
     }
 };
 
-class HttpWebRequest: public QObject
+class DLL_DECL_SPEC HttpWebRequest: public QObject
 {
     Q_OBJECT
 public:
@@ -123,7 +125,6 @@ private:
     QNetworkRequest constructNetworkRequest(const QString& hostName);
     void ApplyReplySettings(QNetworkReply *reply);
 };
-
 
 Q_DECLARE_METATYPE(HttpWebRequestsResponse)
 

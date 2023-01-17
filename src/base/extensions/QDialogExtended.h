@@ -9,7 +9,9 @@
 
 #include <QDialog>
 
-class QDialogExtended: public QDialog
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC QDialogExtended: public QDialog
 {
     Q_OBJECT
 public:

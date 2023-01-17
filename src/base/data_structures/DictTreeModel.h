@@ -10,7 +10,9 @@
 #include <QStringList>
 #include "Dict.h"
 
-class DictTreeItem
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC DictTreeItem
 {
 public:
     explicit DictTreeItem(const QList<QVariant> &data, DictTreeItem *parentItem = nullptr);
@@ -31,7 +33,7 @@ private:
     DictTreeItem *m_parentItem;
 };
 
-class DictTreeModel : public QAbstractItemModel
+class DLL_DECL_SPEC DictTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:

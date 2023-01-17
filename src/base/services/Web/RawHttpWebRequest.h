@@ -5,6 +5,7 @@
 #include <QByteArray>
 #include <QSslSocket>
 #include <QTimer>
+#include "base/LibCfg.h"
 #include "base/services/Web/Parsers/RawHttpResponseParser.h"
 #include "base/services/Web/Parsers/RawHttpRequestParser.h"
 
@@ -13,7 +14,7 @@ namespace Services { namespace Web
     using Services::Parsers::RawHttpRequestParser;
     using Services::Parsers::RawHttpResponseParser;
 
-    class RawHttpWebRequest: public QObject
+    class DLL_DECL_SPEC RawHttpWebRequest: public QObject
     {
         enum state
         {

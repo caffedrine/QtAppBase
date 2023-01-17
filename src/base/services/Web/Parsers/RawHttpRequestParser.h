@@ -3,12 +3,14 @@
 
 #include <QByteArray>
 #include <QMap>
+
+#include "base/LibCfg.h"
 #include "base/utils/utils.h"
 #include "HttpParsersBase.h"
 
 namespace Services { namespace Parsers {
 
-class RawHttpRequestParser: public Services::Parsers::HttpParsersBase
+class DLL_DECL_SPEC RawHttpRequestParser: public Services::Parsers::HttpParsersBase
 {
 public:
     RawHttpRequestParser();

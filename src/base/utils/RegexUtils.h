@@ -9,10 +9,11 @@
 
 #include <QString>
 #include <QStringList>
+#include "base/LibCfg.h"
 
 namespace utils { namespace regex
 {
-    QStringList GetAllMatches(QString regexPattern, QString str);
+    DLL_DECL_SPEC QStringList GetAllMatches(QString regexPattern, QString str);
 }} // Namespaces
 
 #endif // _REGEXUTILS_H_

@@ -7,9 +7,11 @@
 #include <QString>
 #include <QStringList>
 
+#include "base/LibCfg.h"
+
 namespace Services { namespace Whois
 {
-    class DomainWhois
+    class DLL_DECL_SPEC DomainWhois
     {
     public:
         const bool SHOW_DEBUG_MESSAGES = true;

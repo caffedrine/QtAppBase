@@ -14,6 +14,7 @@
 #include <QTextDocument>
 #include <QMutex>
 
+#include "base/LibCfg.h"
 #include "base/app/Cfg_PortsScanner.h"
 #include "base/utils/utils.h"
 #include "base/utils/ThreadsPool.h"
@@ -24,7 +25,7 @@ namespace Services { namespace PortsScanner
 {
 
 /* */
-class PostsScanResultTarget
+class DLL_DECL_SPEC PostsScanResultTarget
 {
 public:
     int TargetIndexWithinProfile;
@@ -59,7 +60,7 @@ public:
 };
 
 /* */
-class PortsScanner: public QObject, public ThreadsPool
+class DLL_DECL_SPEC PortsScanner: public QObject, public ThreadsPool
 {
 Q_OBJECT
 public:

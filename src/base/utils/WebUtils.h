@@ -6,7 +6,7 @@
 
 namespace utils { namespace web
 {
-    QString GetDomainNameFromUrl(QString url);
+    DLL_DECL_SPEC QString GetDomainNameFromUrl(QString url);
 }} // Namespaces
 
 

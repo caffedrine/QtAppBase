@@ -19,7 +19,6 @@
 #	include <QNetworkReply>
 #endif // QT_NETWORK_LIB
 
-
 /*! Namespace for HTTP status codes and reason phrases.
  */
 namespace HttpStatus

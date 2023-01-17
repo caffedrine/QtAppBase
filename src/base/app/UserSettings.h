@@ -4,9 +4,11 @@
 #include <QSettings>
 #include <QString>
 
+#include "base/LibCfg.h"
+
 #define UserSettings User_Settings::inst()
 
-class User_Settings
+class DLL_DECL_SPEC User_Settings
 {
 public:
     Q_DISABLE_COPY(User_Settings)

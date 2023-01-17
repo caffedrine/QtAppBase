@@ -73,7 +73,7 @@
 #  include "UriDefsUnicode.h"
 # endif
 
-
+#include "base/LibCfg.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -148,7 +148,7 @@ typedef struct URI_TYPE(HostDataStruct) {
  * @see UriParserStateA
  * @since 0.3.0
  */
-typedef struct URI_TYPE(UriStruct) {
+typedef struct URI_TYPE(UriStruct ) {
 	URI_TYPE(TextRange) scheme; /**< Scheme (e.g. "http") */
 	URI_TYPE(TextRange) userInfo; /**< User info (e.g. "user:pass") */
 	URI_TYPE(TextRange) hostText; /**< Host text (set for all hosts, excluding square brackets) */

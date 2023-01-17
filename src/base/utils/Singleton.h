@@ -3,9 +3,10 @@
 
 #include <QtGlobal>
 #include <string>
+#include "base/LibCfg.h"
 
 template <typename T, typename D = T>
-class Singleton
+class DLL_DECL_SPEC Singleton
 {
     friend D;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

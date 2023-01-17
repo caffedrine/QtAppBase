@@ -6,12 +6,13 @@
 #include <QMap>
 #include <QStringList>
 
+#include "base/LibCfg.h"
 #include "base/utils/utils.h"
 
 namespace Services { namespace PortsScanner
 {
 
-class DeviceTypes
+class DLL_DECL_SPEC DeviceTypes
 {
 public:
     const QString ICS = "ICS";

@@ -42,7 +42,9 @@
 #include <QVariant>
 #include <QMap>
 
-class Dict
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC Dict
 {
 public:
     QVariant val;

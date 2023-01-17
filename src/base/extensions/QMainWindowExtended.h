@@ -5,7 +5,9 @@
 #include <QEventLoop>
 #include <QWidget>
 
-class QMainWindowExtended: public QMainWindow
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC QMainWindowExtended: public QMainWindow
 {
     Q_OBJECT
 public:

@@ -4,7 +4,9 @@
 #include <QComboBox>
 #include <QListWidget>
 
-class MultiSelectComboBox : public QComboBox
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC MultiSelectComboBox : public QComboBox
 {
     Q_OBJECT
 

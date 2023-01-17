@@ -3,6 +3,8 @@
 
 #include <QtCore/QString>
 
+#include "base/LibCfg.h"
+
 namespace Services { namespace GeoIP { namespace Settings
 {
     namespace GeoIPProviders

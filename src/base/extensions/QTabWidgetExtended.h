@@ -3,7 +3,9 @@
 
 #include <QTabWidget>
 
-class QTabWidgetExtended: public QTabWidget
+#include "base/LibCfg.h"
+
+class DLL_DECL_SPEC QTabWidgetExtended: public QTabWidget
 {
     Q_OBJECT
 public:

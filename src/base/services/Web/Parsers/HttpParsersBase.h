@@ -6,11 +6,12 @@
 #include <QList>
 #include <QMap>
 
+#include "base/LibCfg.h"
 #include "base/utils/utils.h"
 
 namespace Services { namespace Parsers {
 
-    class HttpParsersBase
+    class DLL_DECL_SPEC HttpParsersBase
     {
         enum ChunksParserState
         {

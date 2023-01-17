@@ -5,8 +5,10 @@
 #include <QListView>
 #include <QStringList>
 
+#include "base/LibCfg.h"
+
 // Subclass QAbstractListModel to represent the text data
-class QListViewModel : public QAbstractListModel
+class DLL_DECL_SPEC QListViewModel : public QAbstractListModel
 {
 public:
     QListViewModel(const QStringList &lines, QObject *parent = nullptr);

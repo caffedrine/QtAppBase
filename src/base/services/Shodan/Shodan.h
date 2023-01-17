@@ -6,9 +6,11 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QNetworkAccessManager>
+
+#include "base/LibCfg.h"
 #include "base/services/Web/HttpWebRequest.h"
 
-class Shodan: public QObject
+class DLL_DECL_SPEC Shodan: public QObject
 {
 Q_OBJECT
 public:
