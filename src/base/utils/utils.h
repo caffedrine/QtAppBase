@@ -1,6 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
@@ -55,5 +52,3 @@ DLL_DECL_SPEC QByteArrayList SplitByteArray(const QByteArray &in, QByteArray del
 DLL_DECL_SPEC void SleepMs(quint64 ms);
 
 #endif // _UTILS_H_
-
-#pragma clang diagnostic pop

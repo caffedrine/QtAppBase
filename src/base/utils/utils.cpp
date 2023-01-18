@@ -10,9 +10,6 @@
 #include <QString>
 #include <QByteArray>
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-
 QString Utils_Uint8ToHexQStr(uint8_t in)
 {
     return QString("%1").arg(in, 2, 16, QLatin1Char( '0' )).toUpper();
@@ -394,8 +391,6 @@ void Utils_RichTextBoxPopup(const QString &title, const QString &content)
     editor->show();
 }
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "misc-no-recursion"
 void Utils_PrintNestedQMap(const QVariantMap &map, int level)
 {
     QString tabs = "";
@@ -455,8 +450,6 @@ QByteArrayList SplitByteArray(const QByteArray &in, QByteArray delimiter)
     return out;
 }
 
-#pragma clang diagnostic pop
-
 void SleepMs(quint64 ms)
 {
     QTime dieTime = QTime::currentTime().addMSecs( ms );
@@ -466,5 +459,3 @@ void SleepMs(quint64 ms)
         QObject().thread()->usleep(1000*ms);
     }
 }
-
-#pragma clang diagnostic pop

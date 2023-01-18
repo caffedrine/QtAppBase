@@ -51,7 +51,7 @@ public:
 
     explicit Dict() = default;
     explicit Dict(QVariant val): val(std::move(val)) { };
-    ~Dict();
+    virtual ~Dict();
 
     Dict& operator[](const QString &idx);
     Dict& operator=(const QVariant &v);

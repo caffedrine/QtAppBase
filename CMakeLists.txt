@@ -12,6 +12,15 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+# Enable optimizations for release
+add_compile_options(
+        -Wall -Werror -Wno-error=maybe-uninitialized
+        $<$<CONFIG:RELEASE>:-Ofast>
+        $<$<CONFIG:DEBUG>:-O0>
+        $<$<CONFIG:DEBUG>:-ggdb3>
+)
+add_compile_definitions($<$<CONFIG:RELEASE>:NDEBUG>)
+
 # Assume error console to print out data always
 set(QT_ASSUME_STDERR_HAS_CONSOLE 1)
 

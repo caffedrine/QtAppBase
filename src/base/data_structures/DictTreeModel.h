@@ -1,9 +1,6 @@
 #ifndef _TREEMODEL_H
 #define _TREEMODEL_H
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "modernize-use-nodiscard"
-
 #include <QObject>
 #include <QVariant>
 #include <QAbstractItemModel>
@@ -54,7 +51,5 @@ private:
     void setupModelData(Dict *dict, DictTreeItem *parent);
     DictTreeItem *rootItem;
 };
-
-#pragma clang diagnostic pop
 
 #endif //_TREEMODEL_H

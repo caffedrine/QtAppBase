@@ -116,12 +116,12 @@ namespace Value {
         }
         pos = oldPos2; //tags will be read again in Object.ReadFromBuffer
 
-        bool TagNotFound = true;
+        //bool TagNotFound = true;
         for (unsigned int i = 0; i < m_Objects.size(); i++) {
           ASN1_Value* Object = m_Objects.at(i);
 
           if (Object->CheckTags(ImplTag, ExplTag, false, 0)) {
-            TagNotFound = false;
+            //TagNotFound = false;
 
             bool found = false;
             unsigned int j;

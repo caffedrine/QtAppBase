@@ -178,7 +178,7 @@ void RawHttpWebRequest::Log(const QString &str)
 
 void RawHttpWebRequest::Abort()
 {
-    if( this->tcpSocket != nullptr && this->tcpSocket->isValid() || this->tcpSocket->isOpen() )
+    if( (this->tcpSocket != nullptr) && ((this->tcpSocket->isValid()) || (this->tcpSocket->isOpen())) )
     {
         this->Conn_SystemErrorOccurred("abort requested by user");
         this->tcpSocket->abort();

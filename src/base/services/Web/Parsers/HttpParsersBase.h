@@ -24,7 +24,7 @@ namespace Services { namespace Parsers {
         };
 
         ChunksParserState ChunkedParsingState = CHNK_INVALID;
-        quint64 currentChunkLength = -1;
+        qsizetype currentChunkLength = -1;
 
     public:
         void addData(QByteArray chunkData);
