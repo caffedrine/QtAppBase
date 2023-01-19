@@ -32,12 +32,12 @@ void HttpWebRequest::GET(const QString &url)
     emit this->RequestStarted("GET", &request, QByteArray());
 }
 
-void HttpWebRequest::DELETE(const QString &url)
+void HttpWebRequest::DELETE_(const QString &url)
 {
     QNetworkRequest request = this->constructNetworkRequest(url);
     QNetworkReply *reply = this->networkManager->deleteResource(request);
     this->ApplyReplySettings(reply);
-    emit this->RequestStarted("DELETE", &request, QByteArray());
+    emit this->RequestStarted("DELETE_", &request, QByteArray());
 }
 
 void HttpWebRequest::PUT(const QString &url, const QByteArray &rawData)

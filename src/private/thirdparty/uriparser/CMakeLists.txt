@@ -9,7 +9,7 @@ if (MSVC)
 endif()
 
 # Get all sources
-file(GLOB_RECURSE LIB_SOURCES "*.c" "*.cpp")
+file(GLOB_RECURSE LIB_SOURCES "src/*.c" "src/*.cpp")
 
 add_library(UriParser ${LIB_SOURCES})
 add_library(Uri::UriParser ALIAS UriParser)
@@ -20,8 +20,8 @@ configure_file(UriParser.pc.in UriParser.pc @ONLY)
 
 # Public API headers
 target_include_directories(UriParser PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include>)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+        $<INSTALL_INTERFACE:src>)
 
 install(TARGETS UriParser LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(TARGETS UriParser EXPORT UriParserConfig LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

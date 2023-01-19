@@ -73,13 +73,9 @@
 #  include "UriDefsUnicode.h"
 # endif
 
-#include "base/LibCfg.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-
 
 #ifndef URI_DOXYGEN
 # include "UriBase.h"

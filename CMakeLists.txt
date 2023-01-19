@@ -29,28 +29,26 @@ find_package(QT NAMES Qt6 Qt5)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent Xml REQUIRED)
 
 # Get all sources
-file(GLOB_RECURSE Proj_SOURCES "src/*.c" "src/*.cpp")
-file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
+file(GLOB_RECURSE Proj_SOURCES "src/base/*.c" "src/base/*.cpp")
+# file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 
 # Create library
-add_library(QtAppBase SHARED ${Proj_SOURCES} ${Thirdparty_SOURCES})
+add_library(QtAppBase SHARED ${Proj_SOURCES})
 add_library(base::QtAppBase ALIAS QtAppBase)
 set_target_properties(QtAppBase PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION 1)
 configure_file(QtAppBase.pc.in QtAppBase.pc @ONLY)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/src/base)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src)
 set(IS_BUILT_AS_LIBRARY 1)
 
 # include thirdparty libs
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/ASN1)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/ASN1)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/src/base/thirdparty/ASN1)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src/base/thirdparty/ASN1)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/src/base/thirdparty/spdlog)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src/base/thirdparty/spdlog/include)
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/UriParser)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/UriParser)
-
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/spdlog)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/thirdparty/base/thirdparty/spdlog/include)
-include_directories(thirdparty/base)
-include_directories(thirdparty/base/thirdparty)
+# include private code
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/src/private/thirdparty/uriparser)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src/private/thirdparty/uriparser/src)
 
 target_link_libraries(QtAppBase PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
@@ -58,7 +56,8 @@ target_link_libraries(QtAppBase PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Concurrent
         Qt${QT_VERSION_MAJOR}::Xml
-        spdlog::spdlog)
+        spdlog::spdlog
+        Uri::UriParser)
 
 # Public API headers
 target_include_directories(QtAppBase PUBLIC
@@ -67,13 +66,8 @@ target_include_directories(QtAppBase PUBLIC
 
 # Spdlog
 target_include_directories(QtAppBase PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/base/thirdparty/spdlog/include>
-        $<INSTALL_INTERFACE:thirdparty/spdlog/include>)
-
-# thirdparty libs directory
-target_include_directories(QtAppBase PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty>
-        $<INSTALL_INTERFACE:base/thirdparty>)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/base/thirdparty/spdlog/include>
+        $<INSTALL_INTERFACE:src/thirdparty/spdlog/include>)
 
 install(TARGETS QtAppBase LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(TARGETS QtAppBase EXPORT QtAppBaseConfig LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

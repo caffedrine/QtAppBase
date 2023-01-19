@@ -60,7 +60,7 @@ public:
         opStrings[QNetworkAccessManager::Operation::GetOperation]       = "GET";
         opStrings[QNetworkAccessManager::Operation::PutOperation]       = "PUT";
         opStrings[QNetworkAccessManager::Operation::PostOperation]      = "POST";
-        opStrings[QNetworkAccessManager::Operation::DeleteOperation]    = "DELETE";
+        opStrings[QNetworkAccessManager::Operation::DeleteOperation]    = "DELETE_";
         opStrings[QNetworkAccessManager::Operation::CustomOperation]    = "CUSTOM";
         return opStrings[reply->operation()];
     }
@@ -105,7 +105,7 @@ public:
     void PUT(const QString& url, const QByteArray &rawData);
     void PUT(const QString& url, const QMap<QString, QString> &data);
     void HEAD(const QString& url);
-    void DELETE(const QString& url);
+    void DELETE_(const QString& url);
 
 
 signals:

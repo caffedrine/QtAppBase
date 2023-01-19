@@ -4,9 +4,10 @@
 #include <QString>
 
 #include "base/LibCfg.h"
-#include <base/thirdparty/uriparser/Uri.h>
+#include "private/thirdparty/uriparser/src/uriparser/Uri.h"
 
 namespace Services { namespace Parsers {
+
     class DLL_DECL_SPEC Uri
     {
     public:
