@@ -11,7 +11,7 @@ endif()
 # Get all sources
 file(GLOB_RECURSE LIB_SOURCES "src/*.c" "src/*.cpp")
 
-add_library(UriParser ${LIB_SOURCES})
+add_library(UriParser SHARED ${LIB_SOURCES})
 add_library(Uri::UriParser ALIAS UriParser)
 set_target_properties(UriParser PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION 1)
 include_directories(src)

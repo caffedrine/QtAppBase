@@ -1,5 +1,6 @@
 #include "X509Certificate.h"
 
+#include <QDebug>
 #include <QSsl>
 #include <QSslKey>
 #include <QSslCertificate>

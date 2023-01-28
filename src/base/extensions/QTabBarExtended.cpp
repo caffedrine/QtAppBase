@@ -2,6 +2,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPushButton>
+#include <QDebug>
 
 QTabBarExtended::QTabBarExtended(QTabWidget *parent): QTabBar(parent), parentTabWidget(parent), currTabEdit(nullptr), currTabEditIndex(-1)
 {
