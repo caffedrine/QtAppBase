@@ -10,6 +10,7 @@ class DLL_DECL_SPEC QTabWidgetExtended: public QTabWidget
     Q_OBJECT
 public:
     explicit QTabWidgetExtended(QWidget *parent = nullptr);
+    void RequestNewTab();
 
 signals:
     void NewTabRequested();

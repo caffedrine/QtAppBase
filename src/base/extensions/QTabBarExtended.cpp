@@ -14,17 +14,18 @@ QTabBarExtended::QTabBarExtended(QTabWidget *parent): QTabBar(parent), parentTab
     // Create a push button
     QPushButton* newTabBtn = new QPushButton(parent);
     newTabBtn->setText("+");
-    newTabBtn->setStyleSheet(QString("QPushButton {border: 0; padding: 0; padding-bottom: 1px; text-align: center; border-radius: 3px; font-weight: bold;} QPushButton:hover { background-color: #cccccc; }"));
+    //newTabBtn->setStyleSheet(QString("QPushButton {border: 0; padding: 0; padding-bottom: 1px; text-align: center; border-radius: 3px; font-weight: bold;} QPushButton:hover { background-color: #cccccc; }"));
 
     QObject::connect(newTabBtn, &QPushButton::clicked, [this](){
         emit NewTabRequested();
     });
 
     this->setTabButton(lastTabIndex, QTabBar::RightSide, newTabBtn);
-    newTabBtn->resize(this->tabRect(lastTabIndex).height(), this->tabRect(lastTabIndex).height() - 3);
+    newTabBtn->resize(this->tabRect(lastTabIndex).height(), this->tabRect(lastTabIndex).height() - 4);
 
     // Disable passing for last tab
-    this->setStyleSheet(QString("QTabBar::tab:last { padding: 0; padding-left: 5px; margin: 0px; padding-bottom: 2px; border: none;} QTabBar::tab:selected { font-weight: bold; }"));
+    //this->setStyleSheet(QString("QTabBar::tab:last { padding: 0; padding-left: 5px; margin: 0px; padding-bottom: 2px; border: none;} QTabBar::tab:selected { font-weight: bold; }"));
+    // this->setStyleSheet(QString("QTabBar::tab:last { padding: 0; padding-left: 5px; margin: 0px; padding-bottom: 3px; border: none;}"));
 }
 
 void QTabBarExtended::mouseDoubleClickEvent(QMouseEvent *event)
@@ -70,55 +71,9 @@ void QTabBarExtended::mouseDoubleClickEvent(QMouseEvent *event)
             // Set the tab text as the line edit text is changed
             setTabText(currTabEditIndex, text);
 
-            // Resize the line edit widget to fit the text
-            // Get the size of the text in the line edit
-            QFontMetrics fontMetrics = currTabEdit->fontMetrics();
-            QSize size = fontMetrics.size(Qt::TextSingleLine, currTabEdit->text());
-
-            // Add some extra space for the cursor and the frame of the line edit
-            size.setWidth(size.width() + fontMetrics.averageCharWidth() + 5);
-            size.setHeight(size.height() + 4);
-
-            // Resize the line edit
-            currTabEdit->resize(size);
+            // Resize the line edit to have the same size as the tab
+            currTabEdit->resize(tabRect(currTabEditIndex).size());
         });
-    }
-}
-
-void QTabBarExtended::paintEvent(QPaintEvent *event)
-{
-    QTabBar::paintEvent(event);
-    return;
-
-    // Calculate the position and size of the button
-    const int tabCount = count();
-    if (tabCount > 0)
-    {
-        const QRect lastTabRect = this->tabRect(tabCount - 1);
-
-        qDebug() << "tab: " << lastTabRect;
-
-        const int buttonSize = lastTabRect.height() / 2;
-//        const QPoint buttonPos(lastTabRect.right(), lastTabRect.height() / 2);
-        //const QRect buttonRect(buttonPos.x() - buttonSize / 2, buttonPos.y() - buttonSize / 2, buttonSize, buttonSize);
-        const QPoint buttonPos(lastTabRect.right() + buttonSize / 4, height() / 2 - buttonSize / 2);
-
-
-        qDebug() << "button pos: " <<  buttonPos;
-
-        // Create a painter and draw the button
-        QPainter painter(this);
-        painter.setRenderHint(QPainter::Antialiasing);
-
-        // Draw the button background
-        painter.setBrush(QBrush(QColor(200, 200, 200)));
-        painter.setPen(QPen(Qt::NoPen));
-        painter.drawEllipse(buttonPos, buttonSize, buttonSize);
-
-        // Draw the "+" sign
-        painter.setPen(QPen(Qt::black, 2));
-        painter.drawLine(buttonPos.x() + buttonSize / 4, buttonPos.y() + buttonSize / 2, buttonPos.x() + 3 * buttonSize / 4, buttonPos.y() + buttonSize / 2);
-        painter.drawLine(buttonPos.x() + buttonSize / 2, buttonPos.y() + buttonSize / 4, buttonPos.x() + buttonSize / 2, buttonPos.y() + 3 * buttonSize / 4);
     }
 }
 

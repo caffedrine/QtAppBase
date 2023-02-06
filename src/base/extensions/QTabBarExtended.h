@@ -65,7 +65,6 @@ signals:
 protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
 
 protected slots:
 

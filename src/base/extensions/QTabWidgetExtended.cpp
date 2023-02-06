@@ -10,8 +10,9 @@ QTabWidgetExtended::QTabWidgetExtended(QWidget *parent) : QTabWidget(parent)
     QObject::connect(this->tabBar(), SIGNAL(NewTabRequested()), this, SIGNAL(NewTabRequested()));
 
     this->setTabsClosable(true);
+}
 
-    // Remove borders
-    //this->setStyleSheet(QString("QTabWidget::pane { border-left: 0; border-bottom: 0; border-right: 0; border-top: 2px;}"));
-
+void QTabWidgetExtended::RequestNewTab()
+{
+    emit this->NewTabRequested();
 }
