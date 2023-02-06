@@ -1,0 +1,41 @@
+QTabWidget::pane /* The tab widget frame */
+{
+    max-height: 10px;
+    border: none;
+}
+
+QTabWidget::tab-bar
+{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+/* Style the tab using the tab sub-control. Note thait reads QTabBar _not_ QTabWidget */
+QTabBar::tab
+{
+    background-color: rgba(0, 0, 0, 0);
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 1px;
+}
+
+QTabBar::tab:selected
+{
+    color: white;
+    background-color: palette(highlight);
+}
+
+QTabBar::tab:hover
+{
+    background-color: palette(highlight);
+    color: white;
+}
+
+QTabBar::tab:!selected
+{
+
+}

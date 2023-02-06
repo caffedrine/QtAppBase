@@ -29,7 +29,7 @@ find_package(QT NAMES Qt6 Qt5)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent Xml REQUIRED)
 
 # Get all sources
-file(GLOB_RECURSE Proj_SOURCES "src/base/*.c" "src/base/*.cpp")
+file(GLOB_RECURSE Proj_SOURCES "src/base/*.c" "src/base/*.cpp" "src/base/*.qrc")
 # file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 
 # Create library

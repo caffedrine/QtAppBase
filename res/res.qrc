@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/base/">
+        <file>../src/base/extensions/QTabWidgetExtendedStyle.qss</file>
+    </qresource>
+</RCC>

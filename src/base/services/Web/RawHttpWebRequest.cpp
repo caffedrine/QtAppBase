@@ -171,7 +171,7 @@ void RawHttpWebRequest::Conn_ReadyRead()
 
 void RawHttpWebRequest::Log(const QString &str)
 {
-    this->flowLogs.append("[" + QTime::currentTime().toString("yyyy-MM-dd hh:mm:ss.zzz") + "] " +  str);
+    this->flowLogs.append("[" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz") + "] " +  str);
     emit this->RequestStateChangeInfo(this->tcpSocket, this->currRequest, this->currResponse, str);
     qDebug().nospace().noquote() << "[HTTP WEB REQUEST] [" << this->targetHost << ":" << this->targetPort << "] " << str;
 }
