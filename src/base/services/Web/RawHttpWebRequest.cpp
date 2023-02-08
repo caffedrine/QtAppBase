@@ -6,6 +6,18 @@ namespace Services { namespace Web {
 
 RawHttpWebRequest::RawHttpWebRequest(QString host, quint16 port) : targetHost(host), targetPort(port)
 {
+    // Show which OpenSSL version is loaded
+    static bool FirstTime = true;
+    if( !QSslSocket::supportsSsl() )
+    {
+        qWarning().nospace().noquote() << "[HTTP WEB REQUEST] SSL is not working, therefore HTTPS requests will not be possible. OpenSSL might not be installed";
+    }
+    else if( FirstTime )
+    {
+        FirstTime = false;
+        qDebug().nospace().noquote() << "[HTTP WEB REQUEST] Loaded " << QSslSocket::sslLibraryVersionString();
+    }
+
     this->Log("Start");
     this->Log("Create HTTP request handler for " + host + ":" + QString::number(port));
 }
