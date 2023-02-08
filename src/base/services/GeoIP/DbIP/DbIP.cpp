@@ -31,7 +31,7 @@ QString DbIP::IP2CountryISO(const QString &CountryDbPath, const QString &ip_addr
         this->CountryDbReader = MmdbReader::load(CountryDbPath, error);
         if(this->CountryDbReader == nullptr)
         {
-            qDebug() << "Cannot load DB-IP ip2country database ("<<CountryDbPath<<"): "<< error;
+            qWarning().nospace().noquote() << "Cannot load DB-IP ip2country database ("<<CountryDbPath<<"): "<< error;
             return "";
         }
     }
@@ -48,7 +48,7 @@ QString DbIP::IP2CountryName(const QString &CountryDbPath, const QString &ip_add
         this->CountryDbReader = MmdbReader::load(CountryDbPath, error);
         if(this->CountryDbReader == nullptr)
         {
-            qDebug() << "Cannot load DB-IP ip2country database ("<<CountryDbPath<<"): "<< error;
+            qWarning().nospace().noquote() << "Cannot load DB-IP ip2country database ("<<CountryDbPath<<"): "<< error;
             return "";
         }
     }
@@ -65,7 +65,7 @@ QString DbIP::IP2Asn(const QString &AsnDbPath, const QString &ip_address)
         this->AsnDbReader = MmdbReader::load(AsnDbPath, error);
         if(this->AsnDbReader == nullptr)
         {
-            qDebug() << "Cannot load DB-IP ip2asn database: "<< error;
+            qWarning().nospace().noquote() << "Cannot load DB-IP ip2asn database: "<< error;
             return "";
         }
     }
@@ -82,7 +82,7 @@ QString DbIP::IP2Org(const QString &AsnDbPath, const QString &ip_address)
         this->AsnDbReader = MmdbReader::load(AsnDbPath, error);
         if(this->AsnDbReader == nullptr)
         {
-            qDebug() << "Cannot load DB-IP ip2asn database: "<< error;
+            qWarning().nospace().noquote() << "Cannot load DB-IP ip2asn database: "<< error;
             return "";
         }
     }
