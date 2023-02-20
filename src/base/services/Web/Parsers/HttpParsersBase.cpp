@@ -37,7 +37,7 @@ namespace Services { namespace Parsers {
         return QByteArray();
     }
 
-    QByteArray HttpParsersBase::GetRaw()
+    QByteArray HttpParsersBase::GetRaw() const
     {
         return this->RawData;
     }
