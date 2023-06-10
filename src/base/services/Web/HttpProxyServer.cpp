@@ -41,8 +41,8 @@ bool HttpProxyServer::StartServer(QString ip_address, quint16 port)
         qWarning().nospace().noquote() << "[HttpProxyServer] Failed to start proxy server on TCP " << ip_address << ":" << QString::number(port);
         return false;
     }
-    qInfo().nospace().noquote() << "[HttpProxyServer] Started proxy server on TCP " << ip_address << ":" << QString::number(port);
 
+    qInfo().nospace().noquote() << "[HttpProxyServer] Started proxy server on TCP " << ip_address << ":" << QString::number(port);
     return true;
 }
 
