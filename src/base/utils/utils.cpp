@@ -1,7 +1,6 @@
 #include "utils.h"
 
 #include <utility>
-#include <QMovie>
 #include <QObject>
 #include <QMessageBox>
 #include <QPlainTextEdit>
@@ -9,6 +8,8 @@
 #include <QTime>
 #include <QString>
 #include <QByteArray>
+#include <QEventLoop>
+#include <QCoreApplication>
 
 QString Utils_Uint8ToHexQStr(uint8_t in)
 {
@@ -340,31 +341,6 @@ QString Utils_FloatWithDigitsPrecision(float number, int precision)
     return QString::number(number , 'f', precision);
 }
 
-static QMovie *movieLoadingIcon = nullptr;
-void Utils_PushButtonStartLoading(QPushButton *button)
-{
-    if( movieLoadingIcon == nullptr )
-    {
-        movieLoadingIcon = new QMovie();
-        movieLoadingIcon->setFileName(":/img/loading.gif");
-        movieLoadingIcon->start();
-    }
-
-    button->setEnabled(false);
-    QObject::connect(movieLoadingIcon, &QMovie::frameChanged, button, [button]
-    {
-        button->setIcon(movieLoadingIcon->currentPixmap());
-    });
-}
-
-void Utils_PushButtonEndLoading(QPushButton *button)
-{
-    button->setIcon(QIcon());
-    button->setEnabled(true);
-
-    QObject::disconnect(movieLoadingIcon, &QMovie::frameChanged, button, nullptr);
-}
-
 void Utils_Alert(const QString &title, const QString &message)
 {
     QMessageBox msg;
@@ -373,6 +349,7 @@ void Utils_Alert(const QString &title, const QString &message)
     msg.setIcon(QMessageBox::Warning);
     msg.exec();
 }
+
 void Utils_MsgBox(const QString &title, const QString &message)
 {
     QMessageBox msg;
