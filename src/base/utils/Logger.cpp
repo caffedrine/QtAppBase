@@ -14,6 +14,7 @@
 #include "spdlog/cfg/env.h"  // support for loading levels from the environment variable
 #include "spdlog/fmt/ostr.h" // support for user defined types
 
+#ifdef QT_WIDGETS_ENABLED
 namespace spdlog
 {
     namespace sinks
@@ -46,11 +47,15 @@ namespace spdlog
         using qplaintextedit_sink_mt = qplaintextedit_sink<std::mutex>;
     } // namespace sinks
 } // namespace spdlog
+#endif
 
 namespace base
 {
 	spdlog::logger *logger;
-	QPlainTextEdit *loggerContentGui;
+
+#ifdef QT_WIDGETS_ENABLED
+    QPlainTextEdit *loggerContentGui;
+#endif
 
 	void QtCustomOutputMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 	{
@@ -83,8 +88,10 @@ namespace base
 	{
 	    if( !consoleMode )
 	    {
+#ifdef QT_WIDGETS_ENABLED
 	        // Init GUI logs display
 	        loggerContentGui = new QPlainTextEdit();
+#endif
 	    }
 
 	    try
@@ -101,9 +108,11 @@ namespace base
 	        logger = new spdlog::logger("main", sinks);
 	        if( !consoleMode )
 	        {
-	            auto gui_qplaintextedit = std::make_shared<spdlog::sinks::qplaintextedit_sink_mt>(loggerContentGui);
-	            gui_qplaintextedit->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
-	            logger->sinks().push_back(gui_qplaintextedit);
+                #ifdef QT_WIDGETS_ENABLED
+                auto gui_qplaintextedit = std::make_shared<spdlog::sinks::qplaintextedit_sink_mt>(loggerContentGui);
+                gui_qplaintextedit->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [thread %t] [%^%l%$] %v");
+                logger->sinks().push_back(gui_qplaintextedit);
+                #endif
 	        }
 
 	        logger->set_level(spdlog::level::trace);

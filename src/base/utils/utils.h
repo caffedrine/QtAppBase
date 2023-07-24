@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QUrl>
 #include <QHostAddress>
-#include <QPushButton>
+
 #include <base/LibCfg.h>
 
 DLL_DECL_SPEC QString Utils_Uint8ToHexQStr(uint8_t in);
@@ -37,8 +37,6 @@ DLL_DECL_SPEC QStringList Utils_ParseCsvLine(const QString &string);
 DLL_DECL_SPEC QString Util_EncodeForCSV(const QString &string);
 DLL_DECL_SPEC QString Utils_FloatWithDigitsPrecision(float number, int precision = 2);
 
-DLL_DECL_SPEC void Utils_PushButtonStartLoading(QPushButton *button);
-DLL_DECL_SPEC void Utils_PushButtonEndLoading(QPushButton *button);
 DLL_DECL_SPEC void Utils_Alert(const QString &title, const QString &message);
 DLL_DECL_SPEC void Utils_MsgBox(const QString &title, const QString &message);
 DLL_DECL_SPEC void Utils_RichTextBoxPopup(const QString &title, const QString &content);
