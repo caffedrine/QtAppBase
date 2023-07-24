@@ -117,7 +117,7 @@ namespace Services { namespace Parsers {
         }
 
         // Read headers
-        for(QByteArray header: SplitByteArray(headersToBeProcessed, "\r\n"))
+        for(QByteArray &header: SplitByteArray(headersToBeProcessed, "\r\n"))
         {
             // This might be because of the last orphan \r\n
             if( headersToBeProcessed.isEmpty() )

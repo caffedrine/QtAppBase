@@ -4,6 +4,8 @@
 
 #include <QMovie>
 
+namespace utils { namespace widgets
+{
 static QMovie *movieLoadingIcon = nullptr;
 void Utils_PushButtonStartLoading(QPushButton *button)
 {
@@ -28,5 +30,5 @@ void Utils_PushButtonEndLoading(QPushButton *button)
 
     QObject::disconnect(movieLoadingIcon, &QMovie::frameChanged, button, nullptr);
 }
-
+}} // Namespaces
 #endif
