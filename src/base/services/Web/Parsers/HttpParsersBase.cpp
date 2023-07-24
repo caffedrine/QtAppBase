@@ -119,10 +119,15 @@ namespace Services { namespace Parsers {
         // Read headers
         for(QByteArray header: SplitByteArray(headersToBeProcessed, "\r\n"))
         {
+            // This might be because of the last orphan \r\n
+            if( headersToBeProcessed.isEmpty() )
+                continue;
+
             if(!header.contains(":"))
             {
                 this->GlobalParserState = PARSE_FAILED;
                 this->ParseFailReason = "invalid header detected: '" + header + "'";
+                qDebug().nospace().noquote() << " Invalid HTTP Header Detected: " << header;
                 return;
             }
 
