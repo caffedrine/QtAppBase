@@ -31,7 +31,7 @@ namespace Services { namespace Parsers {
 
         bool HaveHeader(QByteArray headerName);
         QByteArray GetHeaderByName(QByteArray headerName);
-        QByteArray GetRaw();
+        QByteArray GetRaw() const;
         QByteArray GetRawHeaders();
         QByteArray GetRawBody();
         QByteArray GetHttpVersion() { return this->HttpVersion; };

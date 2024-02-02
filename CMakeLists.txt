@@ -32,6 +32,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Core Concurrent Xm
 file(GLOB_RECURSE Proj_SOURCES "src/base/*.c" "src/base/*.cpp" "src/base/*.qrc")
 # file(GLOB_RECURSE Thirdparty_SOURCES "thirdparty/*.c" "thirdparty/*.cpp")
 
+message(${Proj_SOURCES})
+
 # Create library
 add_library(QtAppBase SHARED ${Proj_SOURCES})
 add_library(base::QtAppBase ALIAS QtAppBase)

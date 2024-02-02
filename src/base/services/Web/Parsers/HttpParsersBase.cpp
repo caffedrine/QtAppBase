@@ -37,7 +37,7 @@ namespace Services { namespace Parsers {
         return QByteArray();
     }
 
-    QByteArray HttpParsersBase::GetRaw()
+    QByteArray HttpParsersBase::GetRaw() const
     {
         return this->RawData;
     }
@@ -111,18 +111,23 @@ namespace Services { namespace Parsers {
             }
             else if(this->UnprocessedBodyDataReceived.contains("\r\n")) // Last header from list is not completed? leave it for next time and process what we have so far
             {
-                headersToBeProcessed = this->UnprocessedBodyDataReceived.left(this->UnprocessedBodyDataReceived.lastIndexOf("\r\n"));
-                this->UnprocessedBodyDataReceived.remove(0, this->UnprocessedBodyDataReceived.lastIndexOf("\r\n"));
+                headersToBeProcessed = this->UnprocessedBodyDataReceived.left(this->UnprocessedBodyDataReceived.lastIndexOf("\r\n") + 2); // also include \r\n
+                this->UnprocessedBodyDataReceived.remove(0, this->UnprocessedBodyDataReceived.lastIndexOf("\r\n") + 2); // also include \r\n
             }
         }
 
         // Read headers
-        for(QByteArray header: SplitByteArray(headersToBeProcessed, "\r\n"))
+        for(QByteArray &header: SplitByteArray(headersToBeProcessed, "\r\n"))
         {
+            // This might be because of the last orphan \r\n
+            if( header.isEmpty() )
+                continue;
+
             if(!header.contains(":"))
             {
                 this->GlobalParserState = PARSE_FAILED;
                 this->ParseFailReason = "invalid header detected: '" + header + "'";
+                qDebug().nospace().noquote() << " Invalid HTTP Header Detected: '" << header << "'";
                 return;
             }
 
