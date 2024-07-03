@@ -3,6 +3,9 @@
  * Redistribution and modifications are permitted subject to GPL-V3 license.
  */
 #include "ASN1_Object.h"
+
+#include <string.h>
+
 #include "ASN1_Value.h"
 #include "Exceptions.h"
 
